@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: surya-hello-world
+  labels:
+    app: hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      hostNetwork: true
+      containers:
+      - name: jenkins
+        image: suryaobulareddy2932/hello-world
+        ports:
+        - containerPort: 8100
+      restartPolicy: Always
+      securityContext:
+       fsGroup: 0
+       runAsUser: 0
+      volumes:
+       - name: jenkins
+         persistentVolumeClaim:
+          claimName: nfs-pvc-jenkins
