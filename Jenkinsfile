@@ -1,6 +1,13 @@
 pipeline {
     agent any
     stages {
+        stage('Job Init'){
+            steps{ 
+                echo "$JOB_NAME"
+                echo "TimeStamp: ${currentBuild.startTimeInMillis}"
+                //echo "TimeStamp: ${Util.getTimeSpanString(System.currentTimeMillis())}"
+            }
+        }
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github_credentials', url: 'https://github.com/Suryaobulareddy/hello-world-webserver.git']]])
@@ -29,16 +36,16 @@ pipeline {
                 // sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl delete -f hello-world.yaml'
                 
                 
-                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get pods'
-                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
-                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl apply -f hello-world.yaml --record=true'
+//                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get pods'
+//                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
+//                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl apply -f hello-world.yaml --record=true'
                 
                 
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get pods'
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
                 //sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment surya-jenkins-docker'
                 //sh 'kubectl -n default patch deployment carecoordination-servicedeployment -p  \'{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}\''
-                //sh 'kubectl -n default patch deployment surya-hello-world -p  "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"'
+                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment surya-hello-world -p  "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'${currentBuild.startTimeInMillis}'`\"}}}}}"'
                 /*kubernetesDeploy(
                     enableConfigSubstitution: true,
                     configs:'hello-world.yaml',
