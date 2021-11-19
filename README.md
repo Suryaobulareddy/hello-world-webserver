@@ -1,7 +1,7 @@
 # hello-world-webserver
 
 
-### Install nodejs
+### Install Nodejs
 ```
 sudo yum install -y nodejs
 ```
