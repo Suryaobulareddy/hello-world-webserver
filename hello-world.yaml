@@ -26,8 +26,8 @@ spec:
       - name: hello-world
         image: suryaobulareddy2932/hello-world:latest
         imagePullPolicy: Always
-        ports:
-        - containerPort: 9100
+#         ports:
+#         - containerPort: 9100
       restartPolicy: Always
       securityContext:
        fsGroup: 0
