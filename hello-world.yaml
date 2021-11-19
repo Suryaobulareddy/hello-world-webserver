@@ -24,7 +24,8 @@ spec:
       hostNetwork: true
       containers:
       - name: hello-world
-        image: suryaobulareddy2932/hello-world
+        image: suryaobulareddy2932/hello-world:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8100
       restartPolicy: Always
