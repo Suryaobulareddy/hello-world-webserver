@@ -33,18 +33,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jenkins-docker
+  name: hello-world
 spec:
   type: NodePort 
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 8100
+      targetPort: 8100
       name: "http"
-      nodePort: 30000
-    - port: 50000
-      name: "slave"
-      nodePort: 30010
-      targetPort: 50000
+      nodePort: 18100
   selector:
-    app: jenkins-docker
+    app: jenkins
 
