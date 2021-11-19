@@ -45,7 +45,6 @@ spec:
   ports:
     - port: 8100
       name: "http"
-      nodePort: 31000
   type: LoadBalancer
   externalIPs:
     - 164.52.219.186
