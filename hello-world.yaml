@@ -30,9 +30,9 @@ spec:
       - name: hello-world
         image: suryaobulareddy2932/hello-world:latest
         imagePullPolicy: Always
-#         ports:
-#         - containerPort: 9100
-#           name: http
+        ports:
+        - containerPort: 80
+          name: http
       restartPolicy: Always
 # ---        
 # apiVersion: v1
