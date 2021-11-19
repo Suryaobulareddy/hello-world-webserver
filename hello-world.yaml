@@ -35,7 +35,6 @@ kind: Service
 metadata:
   name: hello-world
 spec:
-  type: NodePort 
   ports:
     - port: 8100
       targetPort: 8100
@@ -44,7 +43,6 @@ spec:
   type: LoadBalancer
   externalIPs:
     - 164.52.219.186
-      164.52.219.187
   selector:
     app: jenkins
 
