@@ -27,7 +27,7 @@ spec:
         image: suryaobulareddy2932/hello-world:latest
         imagePullPolicy: Always
         ports:
-        - port: 8100
+        - containerPort: 8100
       restartPolicy: Always
       securityContext:
        fsGroup: 0
@@ -36,19 +36,19 @@ spec:
        - name: hello-world
          persistentVolumeClaim:
           claimName: nfs-pvc-jenkins
----        
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello-world
-spec:
-  ports:
-    - port: 8100
-      targetPort: 8200
-      name: "http"
-  type: LoadBalancer
-  externalIPs:
-    - 164.52.219.186
-  selector:
-    app: hello-world
+# ---        
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: hello-world
+# spec:
+#   ports:
+#     - port: 8100
+#       targetPort: 8200
+#       name: "http"
+#   type: LoadBalancer
+#   externalIPs:
+#     - 164.52.219.186
+#   selector:
+#     app: hello-world
 
