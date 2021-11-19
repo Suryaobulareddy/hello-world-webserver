@@ -40,7 +40,7 @@ spec:
     - port: 8100
       targetPort: 8100
       name: "http"
-      nodePort: 18100
+      nodePort: 31000
   selector:
     app: jenkins
 
