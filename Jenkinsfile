@@ -36,16 +36,16 @@ pipeline {
                 // sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl delete -f hello-world.yaml'
                 
                 
-//                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get pods'
-//                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
-//                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl apply -f hello-world.yaml --record=true'
+                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get pods'
+                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
+                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl apply -f hello-world.yaml --record=true'
                 
                 
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get pods'
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
                 //sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment surya-jenkins-docker'
                 //sh 'kubectl -n default patch deployment carecoordination-servicedeployment -p  \'{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}\''
-                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"${currentBuild.startTimeInMillis}\"}}}}}"'
+                //sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"${currentBuild.startTimeInMillis}\"}}}}}"'
                 /*kubernetesDeploy(
                     enableConfigSubstitution: true,
                     configs:'hello-world.yaml',
