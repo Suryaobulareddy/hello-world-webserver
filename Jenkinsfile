@@ -7,7 +7,7 @@ pipeline {
                 echo "TimeStamp: ${currentBuild.startTimeInMillis}"
                 // Write an useful file, which is needed to be archived.
                 //writeFile file: "output/usefulfile.txt", text: "This file is useful, need to archive it."
-                sh 'echo KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p \\"{\\\"spec\\\":{\\\"template\\\":{\\"metadata\\":{\\"labels\\":{\\"date\\":\\"`date +\'%s\'`\\"}}}}}\\" > /var/jenkins_home/kube/patch.sh'
+                sh 'echo KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p \\"{\\\\\"spec\\\":{\\\"template\\\":{\\"metadata\\":{\\"labels\\":{\\"date\\":\\"`date +\'%s\'`\\"}}}}}\\" > /var/jenkins_home/kube/patch.sh'
                 sh 'chmod a+x /var/jenkins_home/kube/patch.sh'
                 sh 'ls -lrt /var/jenkins_home/kube/patch.sh'
                 sh 'cat /var/jenkins_home/kube/patch.sh'
