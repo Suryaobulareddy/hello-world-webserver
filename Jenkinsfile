@@ -40,6 +40,7 @@ pipeline {
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl apply -f hello-world.yaml --record=true'
                 
+                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"${currentBuild.startTimeInMillis}\"}}}}}"'
                 
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get pods'
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
