@@ -5,6 +5,9 @@ pipeline {
             steps{ 
                 echo "$JOB_NAME"
                 echo "TimeStamp: ${currentBuild.startTimeInMillis}"
+                sh 'echo "\"{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +\'%s\'`\"}}}}}\"" > /var/jenkins_home/kube/patch.sh'
+                sh 'chmod a+x /var/jenkins_home/kube/patch.sh'
+                sh 'ls /var/jenkins_home/kube/patch.sh -lrt'
                 //echo "TimeStamp: ${Util.getTimeSpanString(System.currentTimeMillis())}"
             }
         }
