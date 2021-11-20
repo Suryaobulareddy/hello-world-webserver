@@ -7,8 +7,8 @@ pipeline {
                 echo "TimeStamp: ${currentBuild.startTimeInMillis}"
                 sh 'echo "KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p \"{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +\'%s\'`\"}}}}}\"" > /var/jenkins_home/kube/patch.sh'
                 sh 'chmod a+x /var/jenkins_home/kube/patch.sh'
-                sh 'ls /var/jenkins_home/kube/patch.sh -lrt'
-                sh 'cat /var/jenkins_home/kube/patch.sh -lrt'
+                sh 'ls -lrt /var/jenkins_home/kube/patch.sh'
+                sh 'cat /var/jenkins_home/kube/patch.sh'
                 //echo "TimeStamp: ${Util.getTimeSpanString(System.currentTimeMillis())}"
             }
         }
