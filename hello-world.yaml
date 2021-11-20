@@ -25,28 +25,29 @@ spec:
         tier: backend
         track: stable
     spec:
-      hostNetwork: true
       containers:
       - name: hello-world
         image: suryaobulareddy2932/hello-world:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - containerPort: 8100
           name: http
       restartPolicy: Always
-# ---        
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: hello-world
-# spec:
-#   ports:
-#     - port: 8100
-#       targetPort: 8200
-#       name: "http"
-#   type: LoadBalancer
+---        
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world
+spec:
+  ports:
+    - port: 8100
+      targetPort: 8100
+      name: "http"
+      nodePort: 31000
+  type: LoadBalancer
 #   externalIPs:
 #     - 164.52.219.186
-#   selector:
-#     app: hello-world
+#     - 164.52.219.187
+  selector:
+    app: hello-world
 
