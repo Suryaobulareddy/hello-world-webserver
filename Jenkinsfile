@@ -5,9 +5,10 @@ pipeline {
             steps{ 
                 echo "$JOB_NAME"
                 echo "TimeStamp: ${currentBuild.startTimeInMillis}"
-                sh 'echo "\"{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +\'%s\'`\"}}}}}\"" > /var/jenkins_home/kube/patch.sh'
+                sh 'echo "KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p \"{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +\'%s\'`\"}}}}}\"" > /var/jenkins_home/kube/patch.sh'
                 sh 'chmod a+x /var/jenkins_home/kube/patch.sh'
                 sh 'ls /var/jenkins_home/kube/patch.sh -lrt'
+                sh 'cat /var/jenkins_home/kube/patch.sh -lrt'
                 //echo "TimeStamp: ${Util.getTimeSpanString(System.currentTimeMillis())}"
             }
         }
@@ -43,7 +44,7 @@ pipeline {
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl apply -f hello-world.yaml --record=true'
                 
-                sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"today\"}}}}}"'
+                //sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"today\"}}}}}"'
                 
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get pods'
                 sh 'KUBECONFIG=/var/jenkins_home/kube/config kubectl get svc'
