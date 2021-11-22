@@ -65,7 +65,7 @@ pipeline {
     }
     post {
         success {
-            mail bcc: 'suryaobulareddy@gmail.com', body: '''Dear Team, This is test mail from Jenkins Pipeline.''', cc: 'surya.obulareddy@celllabs.com', from: '', replyTo: '', subject: 'Jenkins Pipeline Test ', to: 'surya.obulareddy@celllabs.com'
+            mail bcc: 'suryaobulareddy@gmail.com', body: "Dear Team,\n\nThis mail is from Jenkins Pipeline, Here is job info: \n${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}", cc: 'surya.obulareddy@celllabs.com', from: '', replyTo: '', subject: 'Jenkins Pipeline Test ', to: 'surya.obulareddy@celllabs.com'
             //emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
         failure{
