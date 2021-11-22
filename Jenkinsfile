@@ -63,6 +63,17 @@ pipeline {
             }
         }        
     }
+    post {
+        success {
+            mail bcc: 'suryaobulareddy@gmail.com', body: '''Dear Team, This is test mail from Jenkins Pipeline.''', cc: 'surya.obulareddy@celllabs.com', from: '', replyTo: '', subject: 'Jenkins Pipeline Test ', to: 'surya.obulareddy@celllabs.com'
+            //emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
+        failure{
+            emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+        }
+    }
 //      post {
 //         always {
 //             emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
