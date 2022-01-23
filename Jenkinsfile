@@ -5,6 +5,7 @@ pipeline {
             steps{ 
                 echo "$JOB_NAME"
                 echo "TimeStamp: ${currentBuild.startTimeInMillis}"
+                docker version
                 sh 'mkdir -p /var/jenkins_home/kube'
                 // Final required output is kubectl -n default patch deployment carecoordination-servicedeployment -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
                 sh 'echo "KUBECONFIG=/var/jenkins_home/kube/config kubectl -n default patch deployment hello-world -p \\"{\\\\\\"spec\\\\\\":{\\\\\\"template\\\\\\":{\\\\\\"metadata\\\\\\":{\\\\\\"labels\\\\\\":{\\\\\\"date\\\\\\":\\\\\\"`date +\'%s\'`\\\\\\"}}}}}\\"" > /var/jenkins_home/kube/patch.sh'
